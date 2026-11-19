@@ -1,0 +1,16 @@
+# Personal files belong in your resume folder, never in this repo
+knowledge_bank.md
+resume_template.tex
+Applications/
+*.tex
+*.pdf
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+.DS_Store
