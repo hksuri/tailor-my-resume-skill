@@ -1,9 +1,9 @@
 ---
-name: tailor-resume
-description: Given a job posting (link or pasted text), screen the user's resume the way ATS software and a hiring manager would, give an honest verdict on whether they should apply, then generate a tailored one-page LaTeX resume from their own template and knowledge bank. Use whenever the user wants to tailor their resume to a specific job, check resume–job fit, decide whether to apply, or asks to "run tailor-resume" / "/tailor-resume".
+name: tailor-my-resume
+description: Given a job posting (link or pasted text), screen the user's resume the way ATS software and a hiring manager would, give an honest verdict on whether they should apply, then generate a tailored one-page LaTeX resume from their own template and knowledge bank. Use whenever the user wants to tailor their resume to a specific job, check resume–job fit, decide whether to apply, or asks to "run tailor-my-resume" / "/tailor-my-resume".
 ---
 
-# Tailor Resume
+# Tailor My Resume
 
 Turns a job posting into four things:
 1. A blunt gap analysis, written the way ATS software and a hiring manager would read the resume.

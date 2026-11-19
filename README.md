@@ -1,4 +1,4 @@
-# tailor-resume: a Claude Code skill
+# tailor-my-resume: a Claude Code skill
 
 Give it a job posting. It reads your resume the way ATS software and a skeptical hiring manager would, tells you honestly whether you should apply, and builds a tailored one-page LaTeX resume.
 
@@ -13,6 +13,16 @@ For each job posting, the skill writes an `Applications/<Company>-<Role>-<Date>/
   - **Apply verdict**: *Strong apply*, *Worth applying*, *Long shot but defensible* or *Skip this one*, with the reasoning behind it.
   - **General resume tips** that apply beyond this posting.
 - **A tailored `.tex` and compiled `.pdf`**, checked to fit on one page and inspected visually for formatting problems.
+
+## How it tailors to the posting
+
+- **Keyword extraction.** It pulls the posting's top requirements (hard skills, tools, domain terms, methods, and signs of seniority) and marks each one as a must-have or a nice-to-have.
+- **Keyword matching.** It compares each keyword with your knowledge bank and sorts it as covered, weak, implied-but-unstated, or missing. It also reports your coverage, e.g. "16/20 top keywords covered".
+- **Wording in the posting's vocabulary.** Where your real work *is* what the posting describes, it rewrites the bullet in the posting's exact terms, so ATS parsers and recruiters find the match.
+- **Bullet selection and ordering.** It chooses and orders your bullets by how relevant they are to this role. It also reorders your skills rows to put the matching skills first.
+- **One consistent framing.** The same experience can be pitched as specialist or as transferable. It picks whichever the posting calls for and applies it across every role.
+- **Results-first bullets.** Each bullet leads with a strong verb, names a specific object, and ends with a metric. There's no filler and no buzzwords.
+- **Honest gaps.** Keywords you can't defend in an interview stay in the gap report. They're never inserted into your resume.
 
 ## Setup
 
@@ -34,13 +44,13 @@ Create **`knowledge_bank.md`** in the same folder. It's a file you write yoursel
 
 ### 3. Install the skill
 ```bash
-git clone https://github.com/hksuri/tailor-my-resume-skill.git ~/.claude/skills/tailor-resume
+git clone https://github.com/hksuri/tailor-my-resume-skill.git ~/.claude/skills/tailor-my-resume
 ```
 
 ### 4. Run it
 Start Claude Code from your resume folder and run:
 ```
-/tailor-resume https://example.com/careers/some-job-posting
+/tailor-my-resume https://example.com/careers/some-job-posting
 ```
 You can also paste the posting text instead of a link.
 
