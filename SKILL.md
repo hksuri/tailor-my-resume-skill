@@ -22,12 +22,14 @@ Look for these in the user's current working directory:
 - **A job posting**: a URL (fetch it) or pasted text. If neither is given, ask for one before continuing.
 - Optional: the company and role name for naming the output folder (infer them from the posting if not stated), and any specific instructions about what to emphasize.
 
-If the user has previously tailored resumes in `Applications/`, read the one closest to this posting as a reference point.
+If the user has already tailored resumes in `Applications/`, start from the most recent one with the same job family and framing, not from the bare template. Recent resumes carry fixes the template may not have yet, such as spacing, confirmed metrics and better wording. Name the resume you started from in the summary.
 
 ## Workflow
 
 ### 1. Get the job posting
 Fetch it if a URL was given, or use the pasted text directly.
+
+**Multiple postings.** If the user sends more than one posting, say how many distinct resumes the set needs before doing any analysis. Explain which postings share a framing and which one is the outlier, then wait for the user to choose. If one posting matters more (for example, it comes with a referral), treat it as primary. Fold the others in only where they don't dilute it.
 
 ### 2. Extract the top ~20 keywords and requirements
 Include hard skills, tools, domain terms, methods, and signals about seniority or scope. Separate must-haves from nice-to-haves.
@@ -95,8 +97,17 @@ Copy `resume_template.tex` and edit:
 - Where the knowledge bank has one, it ends with a concrete, exact, bolded **outcome** metric tied to a verb. It never uses vague results like "significantly improved". Only the outcome is bolded, never input or setup figures such as test counts, cadences or holdout sizes. If the bank gives only an approximate count ("about 45 tests"), write it as approximate and don't let it be the bullet's headline result.
 - It joins two objects with "and", never "plus".
 - It has no first person, no passive voice and no buzzwords: *leveraged, utilized, spearheaded, responsible for, passionate, cutting-edge, synergies, results-driven*.
+- No opening verb repeats within one role, and at most one repeats on the whole page. Avoid weak openers such as *customized, worked on, helped*.
+- **It passes the stranger test.** A recruiter outside the user's team must understand, on one read, what was done and why it mattered. A bullet that only makes sense next to the one before it, or that describes a method with no result, gets rewritten or cut.
+- **It's simple.** Verb, a brief what, then the metric. Internal mechanics and long tool chains belong in the knowledge bank or interview prep, and tool names belong in the skills section.
+- No concept or method appears in two bullets. Keep it in the bullet where it's stronger.
 
 A bullet that hits every keyword but reads like generic ATS bait fails the check. Rewrite it.
+
+**Truth pass. Run this before compiling:**
+- Any wording not copied directly from the knowledge bank is a new claim. List each one in the summary for the user to confirm. Don't present it as settled.
+- Watch for the common inflations. Examples: "model-based" or "LLM-based" when it was rule-based, "built" when it was co-built, "implemented" when the user used an existing library, "real-time" when it was batch, and any named technique the user couldn't explain in an interview.
+- Skills rows hold only tools and techniques a recruiter would search for. Task descriptions such as "data labeling coordination" don't belong there.
 
 ### 7. Compile and enforce one page
 Run `pdflatex` (or `latexmk -pdf`) twice in the output directory, then check the page count with `pdfinfo` or `python3 -c "from pypdf import PdfReader; print(len(PdfReader('<file>.pdf').pages))"`.
@@ -114,8 +125,10 @@ Never shrink the font or margins to make the resume fit.
 A one-page count doesn't mean the layout is clean. Render the PDF to an image (`pdftoppm -png -r 200`, or `qlmanage -t -s 2000 -o .` on macOS), then look at it and check:
 - **No bullet wraps to 3 or more lines.** Shorten the sentence itself.
 - **Each skills row stays on one line.** Drop that row's lowest-priority item, and don't change column widths.
-- **The gaps between sections look even.** Check every section heading, especially after the last entry of a section.
-- **There are no orphaned single words** on the last line of a bullet, if a small rewording fixes it.
+- **The gaps look even, measured rather than eyeballed.** Measure pixel gaps on the render: before each section heading, from heading to first item, between bullets and between entries. Each group should match within a few pixels. Before tuning any spacing value, compare the body's structure with the template's. A missing list wrapper or spacing command can look like a spacing problem.
+- **There are no orphaned tails.** The last line of a bullet shouldn't hold just one or two words, and a number shouldn't be split from its unit, if a small rewording fixes it. Use `~` in LaTeX to keep a number and its unit together.
+- **The bottom of the page is right.** If the page ends against the bottom margin, cut the weakest line instead of squeezing the spacing. If there's leftover room after Step 7, spread it evenly (before first bullets, between bullets and between sections) rather than leaving it all at the bottom.
+- **The skills label column fits its labels.** If every label is short, a wide fixed label column leaves a gap that looks loose. Size the column to the longest label actually used.
 
 ### 9. Write outputs
 Create `Applications/<Company>-<RoleShort>-<YYYYMMDD>/` in the working directory, using today's date. Delete the LaTeX build files (`.aux`, `.log`, `.out`) and the preview image when you're done. The folder should contain only:
@@ -133,5 +146,19 @@ Filename segments are CamelCase with no spaces, joined with underscores:
 Lead with the Step 4 verdict. Then cover:
 - The keyword coverage achieved (e.g. "16/20 top keywords now covered").
 - What changed compared with the closest earlier resume (or with the template, if this is the first run).
-- Any "implied but not stated" items that need the user's confirmation.
+- Any "implied but not stated" items and truth-pass wording that need the user's confirmation, as a short numbered list the user can answer inline (e.g. "1. yes 2. no, it was co-built").
 - The top 1–2 general tips from Step 5.
+
+### 11. Common follow-ups
+Handle these with the defaults below, without asking for preferences first.
+
+**Referral blurb ("why this candidate").** A referrer often needs a few lines to paste into a referral form. Defaults:
+- Third person, using the candidate's first name only.
+- 3–5 short, casual sentences, written the way someone who knows the candidate would talk. If the user says how the referrer knows them, include it.
+- No metrics and no lists. Describe the kind of work and the kind of teammate.
+- Avoid phrasing that reads as AI-written, such as "rare combination", "not just X but Y", "keeps coming back to" and filler like "actually".
+- If the candidate has a background outside work that's relevant to the role, lead with it.
+
+**Copy-paste text** (blurbs, emails, outreach messages, skill lists for application forms): give it as plain, unindented text, not in a block quote or an indented code block, so it copies cleanly.
+
+**Feedback from another reviewer.** If the user pastes feedback, don't apply it all at once. Go point by point: agree, partly agree or disagree, each with a reason. Ask any factual question a suggestion depends on before acting on it. Then make small edits that keep the current format and length.

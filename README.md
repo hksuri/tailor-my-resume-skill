@@ -23,6 +23,9 @@ For each job posting, the skill writes an `Applications/<Company>-<Role>-<Date>/
 - **One consistent framing.** The same experience can be pitched as specialist or as transferable. It picks whichever the posting calls for and applies it across every role.
 - **Results-first bullets.** Each bullet leads with a strong verb, names a specific object, and ends with a metric. There's no filler and no buzzwords.
 - **Honest gaps.** Keywords you can't defend in an interview stay in the gap report. They're never inserted into your resume.
+- **A truth pass.** Any wording that isn't copied from your knowledge bank is listed for you to confirm. It also checks for common inflations, such as "built" when the work was shared.
+- **Multiple postings.** Send several at once and it first tells you how many resumes you need.
+- **Follow-ups.** It has defaults for referral blurbs, copy-ready outreach text and working through feedback from another reviewer.
 
 ## Setup
 
